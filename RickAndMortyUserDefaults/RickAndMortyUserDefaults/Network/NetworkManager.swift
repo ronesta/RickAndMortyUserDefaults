@@ -7,11 +7,11 @@
 
 import Foundation
 
-class NetworkManager {
+final class NetworkManager {
     static let shared = NetworkManager()
     private init() {}
 
-    let urlString = "https://rickandmortyapi.com/api/character"
+    private let urlString = "https://rickandmortyapi.com/api/character"
 
     func getCharacters(completion: @escaping (Result<[Character], Error>) -> Void) {
         guard let url = URL(string: urlString) else {

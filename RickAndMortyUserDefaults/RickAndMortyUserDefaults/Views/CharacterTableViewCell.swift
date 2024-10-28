@@ -11,13 +11,13 @@ import SnapKit
 final class CharacterTableViewCell: UITableViewCell {
     static let id = "CharacterTableViewCell"
 
-    let activityIndicator: UIActivityIndicatorView = {
+    private let activityIndicator: UIActivityIndicatorView = {
         let activityIndicator = UIActivityIndicatorView(style: .medium)
         activityIndicator.hidesWhenStopped = true
         return activityIndicator
     }()
 
-    let characterImageView: UIImageView = {
+    private let characterImageView: UIImageView = {
         let imageView = UIImageView()
         imageView.contentMode = .scaleAspectFill
         imageView.clipsToBounds = true
@@ -50,7 +50,7 @@ final class CharacterTableViewCell: UITableViewCell {
         return button
     }()
 
-    let markerImageView: UIImageView = {
+    private let markerImageView: UIImageView = {
         let imageView = UIImageView()
         imageView.contentMode = .scaleAspectFill
         imageView.clipsToBounds = true
@@ -189,20 +189,5 @@ final class CharacterTableViewCell: UITableViewCell {
             statusLabel.backgroundColor = .green.withAlphaComponent(0.2)
             statusLabel.textColor = UIColor(red: 34/255, green: 139/255, blue: 34/255, alpha: 1)
         }
-    }
-}
-
-class CustomUILabel: UILabel {
-    var textInsets = UIEdgeInsets(top: 5, left: 9, bottom: 5, right: 9)
-
-    override func drawText(in rect: CGRect) {
-        let paddedRect = rect.inset(by: textInsets)
-        super.drawText(in: paddedRect)
-    }
-
-    override var intrinsicContentSize: CGSize {
-        let size = super.intrinsicContentSize
-        return CGSize(width: size.width + textInsets.left + textInsets.right,
-                       height: size.height + textInsets.top + textInsets.bottom)
     }
 }

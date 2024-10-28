@@ -9,7 +9,7 @@ import UIKit
 import SnapKit
 
 class ViewController: UIViewController {
-    let tableView: UITableView = {
+    private let tableView: UITableView = {
         let tableView = UITableView(frame: .zero, style: .plain)
         tableView.separatorStyle = .none
         return tableView
@@ -40,9 +40,7 @@ class ViewController: UIViewController {
                            forCellReuseIdentifier: CharacterTableViewCell.id)
 
         tableView.snp.makeConstraints { make in
-            make.top.equalTo(view.safeAreaLayoutGuide)
-            make.bottom.equalTo(view.safeAreaLayoutGuide)
-            make.horizontalEdges.equalToSuperview()
+            make.edges.equalToSuperview()
         }
     }
 

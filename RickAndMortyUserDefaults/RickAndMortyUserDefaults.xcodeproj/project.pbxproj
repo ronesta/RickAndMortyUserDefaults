@@ -19,6 +19,7 @@
 		E11BA1AE2CCE871000B21910 /* ImageLoader.swift in Sources */ = {isa = PBXBuildFile; fileRef = E11BA1AD2CCE871000B21910 /* ImageLoader.swift */; };
 		E11BA1B12CCE878B00B21910 /* SnapKit in Frameworks */ = {isa = PBXBuildFile; productRef = E11BA1B02CCE878B00B21910 /* SnapKit */; };
 		E11BA1B52CCE8B3E00B21910 /* StorageManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = E11BA1B42CCE8B3E00B21910 /* StorageManager.swift */; };
+		E173BEDE2CD00E0E00B56507 /* CustomUILabel.swift in Sources */ = {isa = PBXBuildFile; fileRef = E173BEDD2CD00E0E00B56507 /* CustomUILabel.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -35,6 +36,7 @@
 		E11BA1AB2CCE870200B21910 /* NetworkError.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NetworkError.swift; sourceTree = "<group>"; };
 		E11BA1AD2CCE871000B21910 /* ImageLoader.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImageLoader.swift; sourceTree = "<group>"; };
 		E11BA1B42CCE8B3E00B21910 /* StorageManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StorageManager.swift; sourceTree = "<group>"; };
+		E173BEDD2CD00E0E00B56507 /* CustomUILabel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomUILabel.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -68,20 +70,53 @@
 		E11BA1902CCE850B00B21910 /* RickAndMortyUserDefaults */ = {
 			isa = PBXGroup;
 			children = (
-				E11BA1912CCE850B00B21910 /* AppDelegate.swift */,
-				E11BA1932CCE850B00B21910 /* SceneDelegate.swift */,
-				E11BA1952CCE850B00B21910 /* ViewController.swift */,
-				E11BA1A52CCE86D200B21910 /* CharacterTableViewCell.swift */,
-				E11BA1A72CCE86E700B21910 /* Character.swift */,
-				E11BA1A92CCE86F600B21910 /* NetworkManager.swift */,
-				E11BA1AB2CCE870200B21910 /* NetworkError.swift */,
-				E11BA1AD2CCE871000B21910 /* ImageLoader.swift */,
-				E11BA1B42CCE8B3E00B21910 /* StorageManager.swift */,
+				E173BED92CD00D0400B56507 /* Application */,
+				E173BEDA2CD00D1B00B56507 /* Views */,
+				E173BEDB2CD00D2E00B56507 /* Network */,
+				E173BEDC2CD00D4800B56507 /* UserDefaults */,
 				E11BA19A2CCE850E00B21910 /* Assets.xcassets */,
 				E11BA19C2CCE850E00B21910 /* LaunchScreen.storyboard */,
 				E11BA19F2CCE850E00B21910 /* Info.plist */,
 			);
 			path = RickAndMortyUserDefaults;
+			sourceTree = "<group>";
+		};
+		E173BED92CD00D0400B56507 /* Application */ = {
+			isa = PBXGroup;
+			children = (
+				E11BA1912CCE850B00B21910 /* AppDelegate.swift */,
+				E11BA1932CCE850B00B21910 /* SceneDelegate.swift */,
+			);
+			path = Application;
+			sourceTree = "<group>";
+		};
+		E173BEDA2CD00D1B00B56507 /* Views */ = {
+			isa = PBXGroup;
+			children = (
+				E11BA1952CCE850B00B21910 /* ViewController.swift */,
+				E11BA1A52CCE86D200B21910 /* CharacterTableViewCell.swift */,
+				E173BEDD2CD00E0E00B56507 /* CustomUILabel.swift */,
+			);
+			path = Views;
+			sourceTree = "<group>";
+		};
+		E173BEDB2CD00D2E00B56507 /* Network */ = {
+			isa = PBXGroup;
+			children = (
+				E11BA1A72CCE86E700B21910 /* Character.swift */,
+				E11BA1A92CCE86F600B21910 /* NetworkManager.swift */,
+				E11BA1AB2CCE870200B21910 /* NetworkError.swift */,
+				E11BA1AD2CCE871000B21910 /* ImageLoader.swift */,
+			);
+			path = Network;
+			sourceTree = "<group>";
+		};
+		E173BEDC2CD00D4800B56507 /* UserDefaults */ = {
+			isa = PBXGroup;
+			children = (
+				E11BA1B42CCE8B3E00B21910 /* StorageManager.swift */,
+			);
+			path = UserDefaults;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -94,6 +129,7 @@
 				E11BA18A2CCE850B00B21910 /* Sources */,
 				E11BA18B2CCE850B00B21910 /* Frameworks */,
 				E11BA18C2CCE850B00B21910 /* Resources */,
+				E173BED82CD00CDF00B56507 /* ShellScript */,
 			);
 			buildRules = (
 			);
@@ -155,6 +191,28 @@
 		};
 /* End PBXResourcesBuildPhase section */
 
+/* Begin PBXShellScriptBuildPhase section */
+		E173BED82CD00CDF00B56507 /* ShellScript */ = {
+			isa = PBXShellScriptBuildPhase;
+			alwaysOutOfDate = 1;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputFileListPaths = (
+			);
+			inputPaths = (
+			);
+			outputFileListPaths = (
+			);
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "if [[ \"$(uname -m)\" == arm64 ]]; then\n    export PATH=\"/opt/homebrew/bin:$PATH\"\nfi\n\nif which swiftlint > /dev/null; then\n  swiftlint\nelse\n  echo \"warning: SwiftLint not installed, download from https://github.com/realm/SwiftLint\"\nfi\n\n\n";
+			showEnvVarsInLog = 0;
+		};
+/* End PBXShellScriptBuildPhase section */
+
 /* Begin PBXSourcesBuildPhase section */
 		E11BA18A2CCE850B00B21910 /* Sources */ = {
 			isa = PBXSourcesBuildPhase;
@@ -167,6 +225,7 @@
 				E11BA1A82CCE86E700B21910 /* Character.swift in Sources */,
 				E11BA1942CCE850B00B21910 /* SceneDelegate.swift in Sources */,
 				E11BA1B52CCE8B3E00B21910 /* StorageManager.swift in Sources */,
+				E173BEDE2CD00E0E00B56507 /* CustomUILabel.swift in Sources */,
 				E11BA1AE2CCE871000B21910 /* ImageLoader.swift in Sources */,
 				E11BA1A62CCE86D200B21910 /* CharacterTableViewCell.swift in Sources */,
 			);
