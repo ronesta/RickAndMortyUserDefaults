@@ -13,10 +13,10 @@ class ImageLoader {
     private init() {}
 
     func loadImage(from urlString: String, completion: @escaping (UIImage?) -> Void) {
-        let cacheKey = NSString(string: urlString)
 
-        if let cachedImage = DataCache.shared.object(forKey: cacheKey) {
-            completion(cachedImage)
+        if let imageData = StorageManager.shared.loadImage(key: urlString),
+           let image = UIImage(data: imageData) {
+            completion(image)
             return
         }
 
@@ -34,7 +34,7 @@ class ImageLoader {
 
             if let data,
                let image = UIImage(data: data) {
-                DataCache.shared.setObject(image, forKey: cacheKey)
+                StorageManager.shared.saveImage(data, key: urlString)
                 completion(image)
             } else {
                 completion(nil)

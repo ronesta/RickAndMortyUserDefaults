@@ -7,11 +7,11 @@
 
 import Foundation
 
-struct PostCharacters: Decodable {
+struct PostCharacters: Codable {
     let results: [Character]
 }
 
-struct Character: Decodable {
+struct Character: Codable {
     let name: String
     let status: String
     let species: String
@@ -20,6 +20,6 @@ struct Character: Decodable {
     let image: String
 }
 
-struct Location: Decodable {
+struct Location: Codable {
     let name: String
 }

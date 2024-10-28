@@ -47,12 +47,19 @@ class ViewController: UIViewController {
     }
 
     private func getCharacters() {
+        if let savedCharacters = StorageManager.shared.loadCharacters() {
+            characters = savedCharacters
+            tableView.reloadData()
+            return
+        }
+
         NetworkManager.shared.getCharacters { [weak self] result in
             switch result {
             case .success(let character):
-                self?.characters = character
                 DispatchQueue.main.async {
+                    self?.characters = character
                     self?.tableView.reloadData()
+                    StorageManager.shared.saveCharacters(character)
                 }
             case .failure(let error):
                 print("Failed to fetch drinks: \(error.localizedDescription)")
@@ -74,9 +81,9 @@ extension ViewController: UITableViewDataSource {
         }
 
         let character = characters[indexPath.row]
-        let image = character.image
+        let imageURL = character.image
 
-        ImageLoader.shared.loadImage(from: image) { loadedImage in
+        ImageLoader.shared.loadImage(from: imageURL) { loadedImage in
             DispatchQueue.main.async {
                 guard let cell = tableView.cellForRow(at: indexPath) as? CharacterTableViewCell  else {
                     return
